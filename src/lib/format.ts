@@ -27,3 +27,10 @@ export function formatChange(change: Product['change']) {
   if (change.dir === 'down') return { text: `▼ ${value}%`, color: 'text-red-700 bg-red-100' }
   return { text: `—${value}%`, color: 'text-gray-600 bg-gray-100' }
 }
+
+export const UNIT_SHORT_BN: Record<Product['unit'], string> = {
+  kg: 'কেজি',
+  litre: 'লিটার',
+  dozen: 'ডজন',
+  piece: 'পিস',
+}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
@@ -10,6 +10,11 @@ import SocialLogin from '@/components/SocialLogin'
 export default function SignInPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('redirected')) {
+      toast.error('এই পাতাটি দেখতে সাইন ইন করুন', { id: 'redirect' })
+    }
+  }, [])
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()

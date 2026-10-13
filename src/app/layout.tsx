@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { Hind_Siliguri } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
+import { getCategories, getProducts } from '@/lib/api'
+import Navbar from '@/components/Navbar'
+import PriceTicker from '@/components/PriceTicker'
+import Footer from '@/components/Footer'
 import './globals.css'
 
 const hind = Hind_Siliguri({
@@ -15,11 +19,19 @@ export const metadata: Metadata = {
   description: 'চাল, ডাল, তেল, সবজি, মাছ, মাংসসহ নিত্যপ্রয়োজনীয় পণ্যের আজকের বাজার দর।',
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const [categories, products] = await Promise.all([
+    getCategories().catch(() => []),
+    getProducts().catch(() => []),
+  ])
+
   return (
-    <html lang="bn" className={`${hind.variable} h-full antialiased`}>
+    <html lang="bn" data-theme="bazar" className={`${hind.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-base-200 text-base-content">
+        <Navbar categories={categories} />
+        <PriceTicker products={products} />
         {children}
+        <Footer />
         <Toaster position="top-center" />
       </body>
     </html>
