@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { Hind_Siliguri } from 'next/font/google'
+import { Hind_Siliguri, Noto_Color_Emoji } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 import { getCategories, getProducts } from '@/lib/api'
 import Navbar from '@/components/Navbar'
@@ -12,6 +12,12 @@ const hind = Hind_Siliguri({
   subsets: ['bengali', 'latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-hind',
+})
+
+const emoji = Noto_Color_Emoji({
+  subsets: ['emoji'],
+  weight: '400',
+  variable: '--font-emoji',
 })
 
 export const metadata: Metadata = {
@@ -26,7 +32,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   ])
 
   return (
-    <html lang="bn" data-theme="bazar" className={`${hind.variable} h-full antialiased`}>
+    <html lang="bn" data-theme="bazar" className={`${hind.variable} ${emoji.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-base-200 text-base-content">
         <Navbar categories={categories} />
         <PriceTicker products={products} />

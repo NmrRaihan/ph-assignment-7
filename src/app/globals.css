@@ -36,7 +36,7 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-hind), system-ui, sans-serif;
+  --font-sans: var(--font-hind), var(--font-emoji), system-ui, sans-serif;
 }
 
 @keyframes marquee {
