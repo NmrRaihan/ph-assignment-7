@@ -1,6 +1,5 @@
 import type { Category, Product } from '@/types/product'
 
-// If you ever get a 429, switch to https://api.api-store.workers.dev/api/bazardor
 const API_BASE = 'https://openapi.programming-hero.com/api/bazardor'
 
 async function get<T>(path: string): Promise<T> {
